@@ -20,41 +20,61 @@ let hero = new Hero(
     64
 );
 
-let objects =[];
+let objects = [];
 
 const object_img = new Image();
 object_img.src = "../images/Objects/BasicGrassBiom.png";
-let object = new SolidObject(
+// let object = new SolidObject(
+//     object_img,
+//     0,
+//     0,
+//     16,
+//     32,
+//     64,
+//     0,
+//     32,
+//     64
+// )
+objects.push(new SolidObject(
     object_img,
     0,
     0,
     16,
     32,
     64,
-    0,
+    64,
     32,
     64
-)
+));
 
 const draw = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    object.draw();
+    objects[0].draw();
     hero.draw();
 }
 
 const Move = (event) => {
-    if (event.key == "ArrowDown")
+
+    if (event.key == "ArrowDown") {
+        if (objects[0].intersects(hero, 0, 4)) return false
         hero.move(0, 1);
-    if (event.key == "ArrowUp")
+    }
+    if (event.key == "ArrowUp") {
+        if (objects[0].intersects(hero, 0, -4)) return false
         hero.move(0, -1);
-    if (event.key == "ArrowLeft")
+    }
+    if (event.key == "ArrowLeft") {
+        if (objects[0].intersects(hero, -4, 0)) return false
         hero.move(-1, 0);
-    if (event.key == "ArrowRight")
+    }
+    if (event.key == "ArrowRight") {
+        if (objects[0].intersects(hero, 4, 0)) return false
         hero.move(1, 0);
+    }
 }
 
 const StopMove = () => {
-    hero.move(0,0);
+    hero.move(0, 0);
 }
 
 const StartGame = () => {

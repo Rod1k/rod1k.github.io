@@ -70,5 +70,25 @@ class SolidObject extends StandartObject {
     constructor(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
         super(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
     }
+    
+    intersects(hero, x, y) {
+        let x1 = hero.dx+x;
+        let y1 = hero.dy+y;
+        let x2 = x1+hero.sWidth+x;
+        let y2 = y1+hero.sHeight+y;
+
+        let x3 = this.dx;
+        let y3 = this.dy;
+        let x4 = x3+this.dWidth
+        let y4 = y3+this.dHeight;
+
+
+        if  ((((x3<=x1)&&(x1<=x4)) || ((x3<=x2) && (x2<=x4))) && (((y3<=y1)&&(y1<=y4)) || ((y3<=y2) && (y2<=y4))))
+        {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
