@@ -69,26 +69,37 @@ class Hero extends StandartObject {
 class SolidObject extends StandartObject {
     constructor(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
         super(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        this.x1;
+        this.y1
+        this.x2;
+        this.y2;
+
+        this.x3;
+        this.y3;
+        this.x4;
+        this.y4;
     }
-    
+
     intersects(hero, x, y) {
-        let x1 = hero.dx+x;
-        let y1 = hero.dy+y;
-        let x2 = x1+hero.sWidth+x;
-        let y2 = y1+hero.sHeight+y;
+        this.x1 = hero.dx + x;
+        this.y1 = hero.dy + y;
+        this.x2 = this.x1 + hero.sWidth;
+        this.y2 = this.y1 + hero.sHeight;
 
-        let x3 = this.dx;
-        let y3 = this.dy;
-        let x4 = x3+this.dWidth
-        let y4 = y3+this.dHeight;
+        this.x3 = this.dx;
+        this.y3 = this.dy;
+        this.x4 = this.x3 + this.sWidth * 2;
+        this.y4 = this.y3 + this.sHeight * 2;
 
 
-        if  ((((x3<=x1)&&(x1<=x4)) || ((x3<=x2) && (x2<=x4))) && (((y3<=y1)&&(y1<=y4)) || ((y3<=y2) && (y2<=y4))))
-        {
+        if ((((this.x3 < this.x1) && (this.x1 < this.x4)) || ((this.x3 < this.x2) && (this.x2 < this.x4))) && (((this.y3 < this.y1) && (this.y1 < this.y4)) || ((this.y3 < this.y2) && (this.y2 < this.y4)))) {
+            console.log(this.x3 + '<' + this.x2 + '<' + this.x4);
             return true
         } else {
             return false
         }
     }
+    
 }
+
 
